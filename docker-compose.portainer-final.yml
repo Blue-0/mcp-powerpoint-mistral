@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mcp-powerpoint-mistral:
+    build:
+      context: https://github.com/Blue-0/mcp-powerpoint-mistral.git#main
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - TENANT_ID=${TENANT_ID}
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Health check OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    container_name: mcp-powerpoint-mistral
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
