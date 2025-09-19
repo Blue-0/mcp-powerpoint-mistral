@@ -1,0 +1,17 @@
+# Docker ignore - Optimiser la taille de l'image
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md
+AZURE_SETUP.md
+GETTING_STARTED.md
+.git
+.gitignore
+.env.example
+examples/
+scripts/
+*.md
+.vscode/
+.idea/
