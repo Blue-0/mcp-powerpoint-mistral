@@ -3,35 +3,26 @@ version: '3.8'
 services:
   mcp-powerpoint-mistral:
     build:
-      context: .
+      context: https://github.com/Blue-0/mcp-powerpoint-mistral.git#main
       dockerfile: Dockerfile
-      args:
-        NODE_ENV: production
-    container_name: mcp-powerpoint-mistral
-    restart: unless-stopped
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - MCP_SERVER_NAME=mcp-powerpoint-mistral
-      - MCP_SERVER_VERSION=1.0.0
-      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
-      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
-      - MICROSOFT_TENANT_ID=${MICROSOFT_TENANT_ID}
     ports:
       - "3000:3000"
-    volumes:
-      - mcp_logs:/app/logs
+    environment:
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - TENANT_ID=${TENANT_ID}
+      - NODE_ENV=production
     healthcheck:
-      test: ["CMD-SHELL", "node -e \"console.log('Health check OK')\" || exit 1"]
+      test: ["CMD", "node", "-e", "console.log('Health check OK')"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+    restart: unless-stopped
+    container_name: mcp-powerpoint-mistral
+    networks:
+      - mcp-network
 
-volumes:
-  mcp_logs:
+networks:
+  mcp-network:
+    driver: bridge
