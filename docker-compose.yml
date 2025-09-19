@@ -8,9 +8,9 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - CLIENT_ID=${CLIENT_ID}
-      - CLIENT_SECRET=${CLIENT_SECRET}
-      - TENANT_ID=${TENANT_ID}
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
+      - MICROSOFT_TENANT_ID=${MICROSOFT_TENANT_ID}
       - NODE_ENV=production
     healthcheck:
       test: ["CMD", "node", "-e", "console.log('Health check OK')"]
