@@ -7,7 +7,7 @@
     "mcp-powerpoint-mistral": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "mkdir -p dist && tsc",
     "dev": "tsx src/index.ts",
     "dev-http": "tsx src/http-server.ts",
     "start": "node dist/index.js",
@@ -17,8 +17,7 @@
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write src/**/*.ts",
     "setup": "node scripts/setup.js",
-    "clean": "rimraf dist",
-    "prepare": "npm run clean && npm run build"
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "mcp",
